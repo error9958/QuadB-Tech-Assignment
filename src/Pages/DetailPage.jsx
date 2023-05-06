@@ -1,25 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Form from "./Form";
 
 function DetailPage() {
   const [display, setDisplay] = useState(false);
+  const [scroll, setScroll] = useState(true);
   const location = useLocation();
   const show = location.state.show;
 
   return (
-    <>
+    <div
+      className={`h-screen bg-[#303030]  ${
+        scroll ? "overflow-y-auto" : "overflow-hidden"
+      }`}
+    >
       <Navbar />
-      {display && <Form show={show} setDisplay={setDisplay} />}
+      {display && (
+        <Form show={show} setDisplay={setDisplay} setScroll={setScroll} />
+      )}
 
-      <div className="py-5  px-12 mb-10  mx-auto text-xl h-full text-white rounded-b-3xl  gap-y-4 bg-[#343434] lg:w-[1000px] flex flex-col">
-        <span className="text-5xl font-bold">{show.name}</span>
+      <div className="py-5   px-6 sm:px-12  mx-auto md:text-xl  text-white  gap-y-4  lg:w-[1000px] flex flex-col">
+        <span className="text-2xl md:text-5xl  font-bold">
+          {show.name.toUpperCase()}
+        </span>
 
         {show.image ? (
-          <img src={show.image.medium} alt="" className="w-64 " />
+          <img src={show.image.medium} alt="" className="w-64 rounded-md  " />
         ) : (
-          <div className="bg-slate-200 w-48 text-center text-black px-4 h-64 flex justify-center items-center">
+          <div className="bg-[#989898] rounded-md w-48 text-center text-black  px-4 h-64 flex justify-center items-center">
             <span></span> Image Not Found !
           </div>
         )}
@@ -50,12 +59,12 @@ function DetailPage() {
           onClick={() => {
             setDisplay(true);
           }}
-          className="bg-green-500 rounded-lg py-5 font-bold hover:bg-green-600"
+          className="bg-green-500 rounded-lg py-2 md:py-5 font-bold hover:bg-green-600"
         >
           BOOK SHOW
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

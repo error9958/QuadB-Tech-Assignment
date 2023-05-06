@@ -9,7 +9,7 @@ function Navbar() {
         onClick={() => {
           navigate("/");
         }}
-        className="text-white m-auto font-bold text-4xl hover:text-slate-200  cursor-pointer "
+        className="text-white m-auto font-bold text-3xl md:text-4xl hover:text-slate-200  cursor-pointer "
       >
         TV SHOW
       </div>
